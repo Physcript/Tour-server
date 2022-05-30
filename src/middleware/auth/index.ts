@@ -23,11 +23,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
           }
       })
     })
+
+  res.locals.user = user
   
-
-
-  // physcript / start 
-
   next()
   return
 }

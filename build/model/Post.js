@@ -22,6 +22,10 @@ const postSchema = new mongoose_1.default.Schema({
         type: String,
         ref: 'User'
     },
+    tag: {
+        type: [String],
+        lowecase: true
+    }
 }, { timestamps: true });
 const Post = mongoose_1.default.model('Post', postSchema);
 exports.default = Post;

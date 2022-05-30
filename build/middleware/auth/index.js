@@ -30,7 +30,7 @@ exports.default = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             }
         });
     });
-    // physcript / start 
+    res.locals.user = user;
     next();
     return;
 });
