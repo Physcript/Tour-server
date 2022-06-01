@@ -6,5 +6,14 @@ exports.default = {
             message: 'post created'
         });
         return;
+    }),
+    view: ((req, res) => {
+        res.status(200).json({
+            message: {
+                post: res.locals.post
+            }
+        });
+        res.locals.post = undefined;
+        return;
     })
 };

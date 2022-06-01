@@ -3,10 +3,10 @@
 import { Request, Response, NextFunction } from 'express'
 
 export default  (req: Request, res: Response, next: NextFunction) => {
-  const { uid, email } = req.body
+  const { _uid, email } = req.body
   const user = res.locals.user
 
-  if( uid === user.uid  && email === user.email)
+  if( _uid === user.uid  && email === user.email)
     {
       next()
       return
