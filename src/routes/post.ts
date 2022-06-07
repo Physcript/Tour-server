@@ -8,6 +8,8 @@ import createMiddleware from '../middleware/post/create'
 import authMiddleware from '../middleware/auth'
 import validateMiddleware from '../middleware/auth/main'
 import viewMidddleware from '../middleware/post/view'
+import uploadMiddleware from '../middleware/upload/upload'
+import multer from 'multer'
 
 const router = express.Router()
 
@@ -17,8 +19,10 @@ const router = express.Router()
 // validateMiddleware uid email from req.body check in res.locals.user
 //
 //
+const upload = multer()
 
 router.post('/create',authMiddleware,validateMiddleware,createMiddleware,con.create)
+router.post('/upload',upload.array('img'),uploadMiddleware, con.upload)
 router.post('/view',viewMidddleware,con.view)
 
 

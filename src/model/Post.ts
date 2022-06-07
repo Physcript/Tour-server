@@ -12,6 +12,9 @@ const postSchema = new mongoose.Schema({
   img: {
     type: [String]
   },
+  img_id: {
+    type: [String]
+  },
   status: {
     type: Boolean
   },
