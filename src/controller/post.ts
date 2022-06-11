@@ -3,8 +3,11 @@ import { Request, Response } from "express";
 export default {
   create: ((req: Request, res: Response) => {
     res.status(200).json({
-      message: 'post created'
+      message: {
+        postId: res.locals.postId
+      }
     })
+    res.locals.postId = undefined
     return
   }),
   view: ((req: Request, res: Response) => {

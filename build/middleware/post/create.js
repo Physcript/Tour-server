@@ -14,9 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Post_1 = __importDefault(require("../../model/Post"));
 const create = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, body, img, tag } = req.body;
+    const { title, description, img, tag } = req.body;
     const { uid } = res.locals.user;
-    const error_01 = check_user_input(title, body, img, tag);
+    // 
+    console.log('///create');
+    console.log(title, description, tag);
+    const error_01 = check_user_input(title, description, tag);
     if (Object.keys(error_01).length >= 1) {
         res.status(400).json({
             error: error_01
@@ -25,22 +28,21 @@ const create = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
     }
     const post = new Post_1.default({
         title,
-        body,
+        body: description,
         uid,
-        img,
         tag,
         status: false
     });
     yield post.save();
+    res.locals.postId = post._id;
     next();
     return;
 });
-const check_user_input = (title, body, img, tag) => {
+const check_user_input = (title, body, tag) => {
     const err = {};
     const validate = {
         Title: title,
         Body: body,
-        Image: img,
         Tag: tag
     };
     Object.entries(validate).forEach(([key, value]) => {

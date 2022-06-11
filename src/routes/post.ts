@@ -21,7 +21,7 @@ const router = express.Router()
 //
 const upload = multer()
 
-router.post('/create',authMiddleware,validateMiddleware,createMiddleware,con.create)
+router.post('/create',upload.array('img'),authMiddleware,validateMiddleware,createMiddleware,con.create)
 router.post('/upload',upload.array('img'),uploadMiddleware, con.upload)
 router.post('/view',viewMidddleware,con.view)
 

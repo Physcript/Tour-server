@@ -3,8 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     create: ((req, res) => {
         res.status(200).json({
-            message: 'post created'
+            message: {
+                postId: res.locals.postId
+            }
         });
+        res.locals.postId = undefined;
         return;
     }),
     view: ((req, res) => {

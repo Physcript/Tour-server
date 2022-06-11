@@ -15,8 +15,11 @@ cloudinary.config({
 
 
 const upload = async (req: Request, res: Response, next: NextFunction)  => {
+  
   const img = req.files
   let urls:any = await getUrl(img)
+  
+  
   res.locals.url = urls.url
   res.locals.public_id = urls.public_id
 

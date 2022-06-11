@@ -6,10 +6,16 @@ import Post from '../../model/Post'
 
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
-  const { title,body,img, tag } = req.body 
+  const { title,description,img, tag } = req.body 
   const { uid } = res.locals.user
 
-  const error_01 = check_user_input(title,body,img,tag)
+  // 
+  console.log('///create')
+  console.log(title,description,tag)
+
+  const error_01 = check_user_input(title,description,tag)
+  
+
   
   if(Object.keys(error_01).length >= 1)
     {
@@ -21,27 +27,27 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
   const post = new Post({
     title,
-    body,
+    body: description,
     uid,
-    img,
     tag,
     status: false
     
   }) 
 
   await post.save() 
+  
+  res.locals.postId = post._id
 
   next()
   return
 }
 
-const check_user_input = ( title: string, body: string, img: object, tag: object ) => {
+const check_user_input = ( title: string, body: string, tag: object ) => {
   const err: any = {} 
 
   const validate:IEPost = {
     Title: title,
     Body: body,
-    Image: img,
     Tag: tag
   } 
   

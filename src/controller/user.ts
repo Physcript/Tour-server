@@ -4,8 +4,11 @@ import { Request,Response } from 'express'
 export default {
   create: ((req: Request, res: Response) => {
     res.status(200).json({
-      message: 'user created'
+      message: {
+        postId: res.locals.postId ?? ''
+      }
     })
+    res.locals.postId = ''
     return
   }),
 

@@ -7,6 +7,6 @@ export interface IPost {
 export interface IEPost {
   Title: string,
   Body: string,
-  Image: object,
+  Image?: object,
   Tag: object
 }
